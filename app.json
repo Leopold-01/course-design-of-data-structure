@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "pages/index/index"
+    
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2980b9",
+    "navigationBarTitleText": "交通咨询系统",
+    "navigationBarTextStyle": "black"
+  },
+  "sitemapLocation": "sitemap.json"
+}

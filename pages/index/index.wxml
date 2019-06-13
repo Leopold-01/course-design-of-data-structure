@@ -1,0 +1,39 @@
+<!--index.wxml-->
+<view class='container'>
+
+  <form bindsubmit='formSubmit'>
+    <view class="input-container">
+        <view class="input-l">
+          <!-- <text>出发地</text> -->
+          <image src="../../static/images/start.png" />
+          <input
+          name="start_input"
+          cursor-spacing='16' 
+          cursor='16'
+          confirm-type='search' 
+          placeholder="输入出发地" 
+          placeholder-style="color:#e2e2e2;"
+          focus='true'/>
+      </view>
+      <view class="input-r">
+          <!-- <text>目的地</text> -->
+          <image src="../../static/images/destination.png" />
+          <input
+          name="destination_input"
+          cursor-spacing='16' 
+          cursor='16'
+          confirm-type='search' 
+          placeholder-style="color:#e2e2e2;"
+          placeholder="输入目的地" 
+          focus='true'/>
+      </view>
+    </view>
+    
+    <view class='btn'>
+      <button class='animated fadeInUpBig' hover-class='animated rotateOutUpRight' form-type='submit' bindtap="minDistance">查询俩地最短距离</button>
+      <button class='animated fadeInUpBig' hover-class='animated rubberBand' form-type='submit'>查询俩地最低花费</button>
+      <button class='animated fadeInUpBig' hover-class='fadeOutRight' form-type='submit'>查询俩地最少时间</button>
+    </view>
+  </form>
+  
+</view>
