@@ -3,11 +3,18 @@
 //Map键值对存储可以方便的将地名转换为对应下标
 //微信小程序中使用Map无法用get set方法获取数据 所以自己模拟一个
 
+//这里这么做也只是方便了读取城市名字对应的下标时不用遍历数组获取而已  
+//正常使用中还是要创建对象数组然后遍历的  因为键值对应的数据不光一个下标 还有canvas中的位置坐标
+//所以这里另外用一个对象数组来存储 城市的canvas坐标
+//卸载position文件中 这里引用
+const coord = require('./position')
+const Coord =coord.Coord;
 //require就是在nodejs在找有没有可以引用的
 const posS = require('./position.js')
 //放弃使用模块化对数组进行操作 还不会
 // const Graph = require("../../utils/CreateMGraph")
-
+//作为全局不用来回传值
+var path = new Array(10000);
 Page({
   /**
    * 页面的初始数据
@@ -19,8 +26,12 @@ Page({
     //获取用户输入的地名
     start: '',
     destination: '',
+    //要赋初始值
+    matrixStart: 0,
+    matrixDestination: 0,
     //初始化图的邻接矩阵
     mGraph: [[]],
+    isSearch: false
   },
 
   //拿到页面用户输入的目的地
@@ -37,7 +48,15 @@ Page({
     //测试成功将用户输入的地名存储
     // console.log(this.data.start)
     const num = this.data.pos;
-    console.log(num[this.data.start])
+    //因为第一个input输入后 点第二input不知道为什么就直接提交表单了 所以这里第二个值赋值会报错 所以判断下再赋值
+    if(num[start1]>-1&&num[destination1]>-1){
+      this.setData({
+        matrixStart: num[start1],
+        matrixDestination: num[destination1],
+      })
+    }
+    
+    console.log("matrixStart:"+this.data.matrixStart+"  matrixDestination:"+this.data.matrixDestination)
   },
   /**
    * 生命周期函数--监听页面加载
@@ -45,6 +64,8 @@ Page({
   onLoad: function (options) {
     const num = this.data.pos;
     console.log(num);
+    console.log(Coord)
+
   },
 
   minDistance: function () {
@@ -54,14 +75,61 @@ Page({
     var Graph=this.CreateMGraph();
     console.log(Graph);
     //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
-    console.log(this.Dijkstra(Graph,6,5));
+    console.log(this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination));
     //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
 
     //TODO:在界面中渲染出来最后结果 
+    this.DrawCanvas();
+    this.setData({
+      isSearch: true
+    })
     //将最后计算的结果存储到data中 
   },
 
+  //canvas是在一个二维的网格当中 左上角坐标为（0，0）
+  // width: 570rpx;
+  // height: 980rpx;
+  DrawCanvas: function () {
+    //创建mycanvas这个画布对象
+    const ctx = wx.createCanvasContext("mycanvas");
+    
+    this.drawlocation(ctx);
+    this.drawPath(ctx,this.data.matrixStart,this.data.matrixDestination)
+    // this.drawline(ctx);
+    // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
+    //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
+    ctx.draw();
+  },
   
+  //在画布整体居中 固定位置画圆点 表示地方
+  drawlocation: function (ctx) {
+    
+    //画圆
+    function ball(x, y) {
+      ctx.beginPath()
+      ctx.arc(x, y, 5, 0, Math.PI * 2)
+      ctx.setFillStyle('#311B92')
+      ctx.setStrokeStyle('#311B92')
+      ctx.closePath();
+      ctx.fill()
+      ctx.stroke()
+    }
+    
+    for(var i=0;i<Coord.length;i++)
+    {
+      ball(Coord[i].x,Coord[i].y);
+    }
+    // console.log("ball")
+    // ctx.draw()
+    
+  },
+
+  //画查询俩地之间的最短路径
+  drawPath: function(ctx,start,destination) {
+    // console.log(this.data.matrixDestination+"adadawdad")
+    
+  },
+
   CreateMGraph: function() {
     //js不用定义数据类型 弱数据类型 根据你所赋值的类型决定是什么类型的数据
     var i,j;
@@ -105,6 +173,7 @@ Page({
         cols = matrix[0].length;
     var s = new Array(10000);
     var dist = new Array(10000);
+    
     // var path = new Array(10000);这里暂时不需要path
     var mindis,i,j,u;
     if(rows !== cols || start >= rows) return new Error("邻接矩阵错误或者源点错误");
@@ -115,10 +184,18 @@ Page({
       //存储源点到所有顶点的目前最短路径长度 所以初始时就是为源点那一列矩阵的值
       dist[i]=matrix[start][i];//距离初始化
       s[i]=0;//s[]置空
+      if(matrix[start][i]<Infinity)//路径初始化
+      {
+        path[i]=start; //源点到顶点i有边时，置顶点i的前一个顶点为源点
+      }
+      else{
+        path[i]=-1; //没有边时，置顶点i的前一个顶点为-1
+      }
       
     }
     dist[start]=0;
     s[start]=1; //源点编号start放入s中
+    path[start]=0;
     for(i=0;i<rows;i++) //循环直到到所有顶点的最短路径都求出
     {
         mindis=Infinity;//mindis置最小长度初值
@@ -139,12 +216,14 @@ Page({
               if(matrix[u][j]<Infinity && dist[u] + matrix[u][j]<dist[j])
                 {
                   dist[j] = dist[u] + matrix[u][j];
+                  path[j]=u;
                 }
             }
         } 
     }
 
     console.log(dist);
+    console.log(path)
     //返回源点开始到每个顶点的最短路径数组
     // return dist;
     //返回从起点到终点的最短路径
@@ -152,7 +231,17 @@ Page({
     return dist[destination];
   },
 
+  
+  // 弹窗
+  preventTouchMove: function() {
+  
+  },
 
+  back: function () {
+    this.setData({
+      isSearch: false
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

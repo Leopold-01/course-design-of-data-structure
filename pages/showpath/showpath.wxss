@@ -1,0 +1,10 @@
+.mycanvas{
+  width: 750rpx;
+  height: 1334rpx;
+  background: black;
+  
+}
+
+button{
+  margin-top: 300rpx;
+}

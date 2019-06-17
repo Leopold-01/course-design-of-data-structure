@@ -2,11 +2,50 @@
 export const m = {}
 //增加元素 这样增加可以模拟出Map的功能
 //因为js的对象key值可以是自己定义 加''即可
-m['合肥'] = 1
-m['重庆'] = 2
-m['武汉'] = 3
-m['杭州'] = 4
+m['合肥'] = 0
+m['重庆'] = 1
+m['武汉'] = 2
+m['杭州'] = 3
+m['成都'] = 4
+m['厦门'] = 5
+m['上海'] = 6
 
+
+
+const canvasCenterX = 142;
+const canvasCenterY = 270;
+const gap= 50;
+//七个点的坐标
+export const Coord = [
+  {
+    x: canvasCenterX,
+    y: canvasCenterY - gap
+  },
+  {
+    x: canvasCenterX -gap,
+    y: canvasCenterY
+  },
+  {
+    x: canvasCenterX,
+    y: canvasCenterY 
+  },
+  {
+    x: canvasCenterX + gap,
+    y: canvasCenterY
+  },
+  {
+    x: canvasCenterX -gap,
+    y: canvasCenterY + gap
+  },
+  {
+    x: canvasCenterX,
+    y: canvasCenterY + gap
+  },
+  {
+    x: canvasCenterX +gap,
+    y: canvasCenterY + gap
+  }
+]
 
 //关于 exports和module.export
 //首先要明确的一点，module是一个对象 {Object}。

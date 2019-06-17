@@ -1,0 +1,7 @@
+<view>
+  <canvas canvas-id='mycanvas' class='mycanvas'>
+    <!-- <cover-view>
+      <button>asdas</button>
+    </cover-view> -->
+  </canvas>
+</view>

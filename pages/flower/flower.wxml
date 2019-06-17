@@ -1,0 +1,27 @@
+<view class='body'>
+  <view class='out'>
+    <view class='fade-in'>
+      <view class='container'>
+        <view class='one common'></view>
+        <view class='two common'></view>
+        <view class='three common'></view>
+        <view class='four common'></view>
+        <view class='five common'></view>
+        <view class='six common'></view>
+        <view class='seven common'></view>
+        <view class='eight common'></view>
+      </view>
+      <!-- <view class='bar'>
+        <view class='progress'></view>
+      </view> -->
+    </view>
+  </view>
+</view>
+<view class='wel'>
+  <view class='welcome animated lightSpeedIn' >
+  <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" open-type='getUserInfo' bindgetuserinfo='LoginEnter'>
+    欢迎使用交通查询系统
+  </button>
+  
+</view>
+</view>

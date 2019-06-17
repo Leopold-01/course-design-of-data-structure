@@ -1,7 +1,13 @@
 {
   "pages": [
-    "pages/mindist/mindist",
-    "pages/index/index"
+    
+    "pages/index/index",
+    "pages/flower/flower",
+    "pages/showpath/showpath",
+    "pages/mindist/mindist"
+    
+    
+    
     
   ],
   "window": {

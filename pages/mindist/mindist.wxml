@@ -5,7 +5,7 @@
     <view class="btn-container">
         
       <button class="btn1 {{btn1==777?'animated fadeOutRight':''}} {{btn1==2?'animated fadeOutLeft':''}} {{btn1==3?'animated fadeOutLeft':''}} {{btn1==4?'animated fadeOutLeft':''}}" 
-      bindtap="JumpToDist" data-btn1='777' data-btn2='1' data-btn3='1' data-btn4='1'>
+      bindtap="JumpToDist" data-btn1='777' data-btn2='1' data-btn3='1' data-btn4='1' bindanimationend='Goindex' data-index="dist">
           <text class='font'>DISTANCE</text>
           <text class="one">—</text>
       </button>

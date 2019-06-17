@@ -10,6 +10,18 @@ Page({
     btn4: '',
   },
 
+  //动画完成后携带对应参数传到主页 查询
+  Goindex: function (e) {
+    console.log(e)
+    return wx.navigateTo({
+      url: '/pages/index/index',
+      success: res =>{
+        console.log("index")
+      }
+    })
+  },
+
+  //按钮播放动画
   JumpToDist: function (e) {
     console.log(e)
     this.setData({
@@ -19,6 +31,7 @@ Page({
       btn4: e.currentTarget.dataset.btn4,
     })
     console.log(this.data.btn1)
+    
   },
   JumpToCost: function (e) {
     console.log(e)
@@ -83,12 +96,13 @@ Page({
    */
   onHide: function () {
     //当页面隐藏的时候把样式值修改为默认
-    this.setData({
-      btn1:'',
-      btn2:'',
-      btn3:'',
-      btn4:''
-    })
+    //这里设置会导致 动画结束后 到页面成功跳转 之间的间隙出现复位bug
+    // this.setData({
+    //   btn1:'',
+    //   btn2:'',
+    //   btn3:'',
+    //   btn4:''
+    // })
   },
 
   /**
