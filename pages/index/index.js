@@ -6,7 +6,7 @@
 //这里这么做也只是方便了读取城市名字对应的下标时不用遍历数组获取而已  
 //正常使用中还是要创建对象数组然后遍历的  因为键值对应的数据不光一个下标 还有canvas中的位置坐标
 //所以这里另外用一个对象数组来存储 城市的canvas坐标
-//卸载position文件中 这里引用
+//写在position文件中 这里引用
 const coord = require('./position')
 const Coord =coord.Coord;
 //require就是在nodejs在找有没有可以引用的
@@ -14,7 +14,9 @@ const posS = require('./position.js')
 //放弃使用模块化对数组进行操作 还不会
 // const Graph = require("../../utils/CreateMGraph")
 //作为全局不用来回传值
+//path保存源点v到图上其它点的最短路径 path[i]表示v->j的最短路径里j对应的上一个点
 var path = new Array(10000);
+var result = '';
 Page({
   /**
    * 页面的初始数据
@@ -76,6 +78,7 @@ Page({
     console.log(Graph);
     //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
     console.log(this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination));
+    result = this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination);
     //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
 
     //TODO:在界面中渲染出来最后结果 
@@ -95,10 +98,12 @@ Page({
     
     this.drawlocation(ctx);
     this.drawPath(ctx,this.data.matrixStart,this.data.matrixDestination)
+    this.drawtext(ctx)
     // this.drawline(ctx);
     // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
     //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
-    ctx.draw();
+    ctx.draw(false);
+    
   },
   
   //在画布整体居中 固定位置画圆点 表示地方
@@ -108,8 +113,8 @@ Page({
     function ball(x, y) {
       ctx.beginPath()
       ctx.arc(x, y, 5, 0, Math.PI * 2)
-      ctx.setFillStyle('#311B92')
-      ctx.setStrokeStyle('#311B92')
+      ctx.setFillStyle('#4A148C')
+      ctx.setStrokeStyle('#4A148C')
       ctx.closePath();
       ctx.fill()
       ctx.stroke()
@@ -119,7 +124,7 @@ Page({
     {
       ball(Coord[i].x,Coord[i].y);
     }
-    // console.log("ball")
+    console.log("ball")
     // ctx.draw()
     
   },
@@ -127,7 +132,28 @@ Page({
   //画查询俩地之间的最短路径
   drawPath: function(ctx,start,destination) {
     // console.log(this.data.matrixDestination+"adadawdad")
-    
+    var i=destination;
+    var temp = path[i];
+    while(1){
+      //能进入循环就是能执行
+      ctx.beginPath()
+      ctx.moveTo(Coord[i].x,Coord[i].y)
+      ctx.lineTo(Coord[temp].x,Coord[temp].y)
+      ctx.stroke()
+
+      i=temp;
+      temp = path[i];
+      //循环退出条件  
+      if(i===start) break;
+    }
+  },
+
+  drawtext: function (ctx) {
+    var x = 20;
+    var y = 270;
+    var text = this.data.start + "到" + this.data.destination + "最短距离是：" + result;
+    ctx.setFontSize(16)
+    ctx.fillText(text, x, y)
   },
 
   CreateMGraph: function() {

@@ -1,5 +1,8 @@
 <view>
-  <canvas canvas-id='mycanvas' class='mycanvas'>
+  <button bindtap="draw">click</button>
+  <!-- hidden解决wx:if条件渲染canvas第二次加载不绘制问题 -->
+  <canvas hidden="{{!isShow}}" canvas-id='mycanvas' class='mycanvas'>
+  <image bindtap="back" class="back" src="../../static/images/cancel.png"></image>
     <!-- <cover-view>
       <button>asdas</button>
     </cover-view> -->

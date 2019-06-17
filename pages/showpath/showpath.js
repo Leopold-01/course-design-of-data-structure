@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    isShow:false
   },
 
   /**
@@ -14,7 +14,26 @@ Page({
   onLoad: function (options) {
     
   },
-
+  draw: function () {
+    this.setData({
+      isShow:true
+    })
+    //创建mycanvas这个画布对象
+    const ctx = wx.createCanvasContext("mycanvas");
+    const canvasWidth = 375;
+    const canvasHeight = 667;
+    this.drawlocation(ctx,canvasWidth,canvasHeight);
+    // this.drawline(ctx);
+    // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
+    //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
+    ctx.draw();
+    
+  },
+  back:function () {
+    this.setData({
+      isShow:false
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -26,15 +45,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    //创建mycanvas这个画布对象
-    const ctx = wx.createCanvasContext("mycanvas");
-    const canvasWidth = 375;
-    const canvasHeight = 667;
-    this.drawlocation(ctx,canvasWidth,canvasHeight);
-    // this.drawline(ctx);
-    // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
-    //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
-    ctx.draw();
+   
     
   },
 

@@ -38,10 +38,10 @@
   <!-- 实现弹窗(自定义模态对话框) -->
   <!-- 蒙层view中绑定的preventTouchMove函数是一个空函数，使用了catch事件
   目的就是阻止touchmove这样一个冒泡事件继续向下传递。 -->
-  <view class="mask" catchtouchmove="preventTouchMove" wx:if="{{isSearch}}"></view>
+  <view class="mask" catchtouchmove="preventTouchMove" hidden="{{!isSearch}}"></view>
   
   
-      <canvas canvas-id='mycanvas' class='mycanvas modalDlg' wx:if="{{isSearch}}">
+      <canvas canvas-id='mycanvas' class='mycanvas modalDlg' hidden="{{!isSearch}}">
         <image class="back" src="../../static/images/cancel.png" catchtap="back" />
       </canvas>
       

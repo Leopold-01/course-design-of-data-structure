@@ -13,7 +13,7 @@ m['上海'] = 6
 
 
 const canvasCenterX = 142;
-const canvasCenterY = 270;
+const canvasCenterY = 170;
 const gap= 50;
 //七个点的坐标
 export const Coord = [
