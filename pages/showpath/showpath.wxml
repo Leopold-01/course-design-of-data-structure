@@ -1,10 +1,36 @@
 <view>
-  <button bindtap="draw">click</button>
+  
   <!-- hidden解决wx:if条件渲染canvas第二次加载不绘制问题 -->
-  <canvas hidden="{{!isShow}}" canvas-id='mycanvas' class='mycanvas'>
-  <image bindtap="back" class="back" src="../../static/images/cancel.png"></image>
-    <!-- <cover-view>
-      <button>asdas</button>
-    </cover-view> -->
+  <canvas  canvas-id='mycanvas' class='mycanvas'>
+    <view class="input-container">
+        <view class="input-l">
+          <!-- <text>出发地</text> -->
+          <image src="../../static/images/start.png" />
+          <input
+          name="start_input"
+          cursor-spacing='16' 
+          cursor='16'
+          confirm-type='search' 
+          placeholder="输入出发地" 
+          placeholder-style="color:#e2e2e2;"
+          focus='true'/>
+      </view>
+      <view class="input-r">
+          <!-- <text>目的地</text> -->
+          <image src="../../static/images/destination.png" />
+          <input
+          name="destination_input"
+          cursor-spacing='16' 
+          cursor='16'
+          confirm-type='search' 
+          placeholder-style="color:#e2e2e2;"
+          placeholder="输入目的地" 
+          focus='true'/>
+      </view>
+    </view>
+    <view class="btn">
+      
+      <button>查询</button>
+    </view>
   </canvas>
 </view>

@@ -33,7 +33,9 @@ Page({
     matrixDestination: 0,
     //初始化图的邻接矩阵
     mGraph: [[]],
-    isSearch: false
+    isSearch: false,
+    imageW: "",
+    imageH: ""
   },
 
   //拿到页面用户输入的目的地
@@ -59,26 +61,14 @@ Page({
     }
     
     console.log("matrixStart:"+this.data.matrixStart+"  matrixDestination:"+this.data.matrixDestination)
-  },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    const num = this.data.pos;
-    console.log(num);
-    console.log(Coord)
-
-  },
-
-  minDistance: function () {
     console.log("minDistance")
     //TODO:按照图创建邻接矩阵
-    
-    var Graph=this.CreateMGraph();
+
+    var Graph = this.CreateMGraph();
     console.log(Graph);
     //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
-    console.log(this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination));
-    result = this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination);
+    console.log(this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination));
+    result = this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination);
     //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
 
     //TODO:在界面中渲染出来最后结果 
@@ -88,6 +78,42 @@ Page({
     })
     //将最后计算的结果存储到data中 
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    const num = this.data.pos;
+    console.log(num);
+    console.log(Coord)
+    //在页面加载时先画出来查询位置点
+    //后面画时候要注意把ctx.draw(true)参数写出true表示不覆盖上次绘图
+    //创建mycanvas这个画布对象
+    const ctx = wx.createCanvasContext("mycanvas");
+    
+    this.drawlocation(ctx)
+    ctx.draw();
+
+  },
+  //在按钮点击事件画图  不知道为什么在真机上会有延迟 要按俩次button才绘出上次input传入的内容
+  //解决方法放在forsubmit中画
+  minDistance: function () {
+    // console.log("minDistance")
+    // //TODO:按照图创建邻接矩阵
+    
+    // var Graph=this.CreateMGraph();
+    // console.log(Graph);
+    // //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
+    // console.log(this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination));
+    // result = this.Dijkstra(Graph,this.data.matrixStart,this.data.matrixDestination);
+    // //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
+
+    // //TODO:在界面中渲染出来最后结果 
+    // this.DrawCanvas();
+    // this.setData({
+    //   isSearch: true
+    // })
+    // //将最后计算的结果存储到data中 
+  },
 
   //canvas是在一个二维的网格当中 左上角坐标为（0，0）
   // width: 570rpx;
@@ -96,13 +122,12 @@ Page({
     //创建mycanvas这个画布对象
     const ctx = wx.createCanvasContext("mycanvas");
     
-    this.drawlocation(ctx);
     this.drawPath(ctx,this.data.matrixStart,this.data.matrixDestination)
     this.drawtext(ctx)
     // this.drawline(ctx);
     // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
     //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
-    ctx.draw(false);
+    ctx.draw(true);
     
   },
   
@@ -257,17 +282,6 @@ Page({
     return dist[destination];
   },
 
-  
-  // 弹窗
-  preventTouchMove: function() {
-  
-  },
-
-  back: function () {
-    this.setData({
-      isSearch: false
-    })
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

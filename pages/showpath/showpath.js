@@ -5,35 +5,48 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isShow:false
+    isShow:false,
+    imageW: "",
+    imageH: ""
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    
-  },
-  draw: function () {
-    this.setData({
-      isShow:true
-    })
     //创建mycanvas这个画布对象
     const ctx = wx.createCanvasContext("mycanvas");
     const canvasWidth = 375;
     const canvasHeight = 667;
-    this.drawlocation(ctx,canvasWidth,canvasHeight);
+    // this.drawlocation(ctx,canvasWidth,canvasHeight);
     // this.drawline(ctx);
     // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
     //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
+    // 为什么这里要把this先赋值给that呢 
+    //好像是因为this指向同级 that这里是再onload下面的一级
+    var that = this
+    wx.getSystemInfo({
+      
+      success: function(res) {
+        //设置image宽高为屏幕宽高
+        that.setData({
+          imageW: res.windowWidth,
+          imageH: res.windowHeight,
+        })
+
+      }
+    })
+    var img = "../../static/images/map.png"
+    ctx.drawImage(img, 0, 0 , this.data.imageW, this.data.imageH)
     ctx.draw();
+  },
+  draw: function () {
+    
+    
     
   },
-  back:function () {
-    this.setData({
-      isShow:false
-    })
-  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

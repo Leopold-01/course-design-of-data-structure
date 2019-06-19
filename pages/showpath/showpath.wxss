@@ -1,17 +1,39 @@
 .mycanvas{
   width: 750rpx;
   height: 1334rpx;
-  background: black;
+ 
   
 }
 
-button{
-  margin-top: 50rpx;
+
+
+.input-container {
+  margin-top: 140rpx;
+  display: flex;
 }
 
-.back {
-  width: 50rpx;
-  height: 50rpx;
-  margin-top: 5rpx;
-  margin-left: 85%;
+
+input{
+  width: 300rpx;
+  height: 60rpx;
+  /* border: 2px solid #ffffff; */
+  border-bottom: 1px solid rgb(167, 165, 165);
+  /* border-radius:10rpx;  */
+}
+.input-l {
+  display: flex;
+  margin-left: 6rpx;
+  
+}
+.input-l image {
+  width:60rpx;
+  height: 60rpx;
+}
+.input-r {
+  display: flex;
+  margin-left: 6rpx;
+}
+.input-r image {
+  width:60rpx;
+  height: 60rpx;
 }

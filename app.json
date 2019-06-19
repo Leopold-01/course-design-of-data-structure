@@ -1,9 +1,12 @@
 {
   "pages": [
-    "pages/flower/flower",
+    
     "pages/index/index",
     
+    "pages/flower/flower",
     "pages/showpath/showpath",
+    
+    
     "pages/mindist/mindist"
   ],
   "window": {
