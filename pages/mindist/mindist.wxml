@@ -4,23 +4,23 @@
     </view> -->
     <view class="btn-container">
         
-      <button class="btn1 {{btn1==777?'animated fadeOutRight':''}} {{btn1==2?'animated fadeOutLeft':''}} {{btn1==3?'animated fadeOutLeft':''}} {{btn1==4?'animated fadeOutLeft':''}}" 
-      bindtap="JumpToDist" data-btn1='777' data-btn2='1' data-btn3='1' data-btn4='1' bindanimationend='Goindex' data-index="dist">
+      <button class="btn1 {{btn1=='dist'?'animated fadeOutRight':''}} {{btn1==2?'animated fadeOutLeft':''}} {{btn1==3?'animated fadeOutLeft':''}} {{btn1==4?'animated fadeOutLeft':''}}" 
+      bindtap="JumpToDist" data-btn1='dist' data-btn2='1' data-btn3='1' data-btn4='1' bindanimationend='Goindex' >
           <text class='font'>DISTANCE</text>
           <text class="one">—</text>
       </button>
-      <button class="btn2 {{btn2==777?'animated fadeOutRight':''}} {{btn2==1?'animated fadeOutRight':''}}{{btn2==3?'animated fadeOutLeft':''}} {{btn2==4?'animated fadeOutLeft':''}} " 
-      bindtap="JumpToCost" data-btn2='777' data-btn1='2' data-btn3='2' data-btn4='2'>
+      <button class="btn2 {{btn2=='cost'?'animated fadeOutRight':''}} {{btn2==1?'animated fadeOutRight':''}}{{btn2==3?'animated fadeOutLeft':''}} {{btn2==4?'animated fadeOutLeft':''}} " 
+      bindtap="JumpToCost" data-btn2='cost' data-btn1='2' data-btn3='2' data-btn4='2'>
           <text class='font'>COST</text>
           <text class="one">—</text>
       </button>
-      <button class="btn3 {{btn3==777?'animated fadeOutRight':''}} {{btn3==1?'animated fadeOutRight':''}} {{btn3==2?'animated fadeOutRight':''}} {{btn3==4?'animated fadeOutLeft':''}}" 
-      bindtap="JumpToTime" data-btn3='777'data-btn1='3' data-btn2='3' data-btn4='3'>
+      <button class="btn3 {{btn3=='time'?'animated fadeOutRight':''}} {{btn3==1?'animated fadeOutRight':''}} {{btn3==2?'animated fadeOutRight':''}} {{btn3==4?'animated fadeOutLeft':''}}" 
+      bindtap="JumpToTime" data-btn3='time'data-btn1='3' data-btn2='3' data-btn4='3'>
           <text class='font'>TIME</text>
           <text class="one">—</text>
       </button>
-      <button class="btn4 {{btn4==777?'animated fadeOutRight':''}} {{btn4==1?'animated fadeOutRight':''}} {{btn4==2?'animated fadeOutRight':''}} {{btn4==3?'animated fadeOutRight':''}}" 
-      bindtap="JumpToCustom" data-btn4='777' data-btn1='4' data-btn2='4' data-btn3='4'>
+      <button class="btn4 {{btn4=='custom'?'animated fadeOutRight':''}} {{btn4==1?'animated fadeOutRight':''}} {{btn4==2?'animated fadeOutRight':''}} {{btn4==3?'animated fadeOutRight':''}}" 
+      bindtap="JumpToCustom" data-btn4='custom' data-btn1='4' data-btn2='4' data-btn3='4'>
           <text class='font'>CUSTOM</text>
           <text class="one">—</text>
       </button>

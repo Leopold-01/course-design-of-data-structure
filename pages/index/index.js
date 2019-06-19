@@ -35,7 +35,9 @@ Page({
     mGraph: [[]],
     isSearch: false,
     imageW: "",
-    imageH: ""
+    imageH: "",
+    //记录当前页面要查询的内容
+    lookforwhat: "",
   },
 
   //拿到页面用户输入的目的地
@@ -63,8 +65,8 @@ Page({
     console.log("matrixStart:"+this.data.matrixStart+"  matrixDestination:"+this.data.matrixDestination)
     console.log("minDistance")
     //TODO:按照图创建邻接矩阵
-
-    var Graph = this.CreateMGraph();
+    
+    var Graph = this.ChooseCreateGraph(this.data.lookforwhat);
     console.log(Graph);
     //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
     console.log(this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination));
@@ -82,6 +84,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    this.setData({
+      lookforwhat: options.id
+    })
+    console.log(this.data.lookforwhat)
     const num = this.data.pos;
     console.log(num);
     console.log(Coord)
@@ -123,7 +130,7 @@ Page({
     const ctx = wx.createCanvasContext("mycanvas");
     
     this.drawPath(ctx,this.data.matrixStart,this.data.matrixDestination)
-    this.drawtext(ctx)
+    this.drawtext(ctx,this.data.lookforwhat)
     // this.drawline(ctx);
     // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
     //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
@@ -173,51 +180,15 @@ Page({
     }
   },
 
-  drawtext: function (ctx) {
+  drawtext: function (ctx,index) {
     var x = 20;
     var y = 270;
-    var text = this.data.start + "到" + this.data.destination + "最短距离是：" + result;
+    var text = this.data.start + "到" + this.data.destination + index+ "假装为：" + result;
     ctx.setFontSize(16)
     ctx.fillText(text, x, y)
   },
 
-  CreateMGraph: function() {
-    //js不用定义数据类型 弱数据类型 根据你所赋值的类型决定是什么类型的数据
-    var i,j;
-    var n=7;//图的顶点数
-    //js的二维数组初始化
-    var MGraph = new Array(n);//n为矩阵行列数 即图的顶点个数
-    for(i=0;i<MGraph.length;i++)
-    {
-        MGraph[i] = new Array(n);
-    }
-    for(i=0;i<7;i++){
-        for(j=0;j<7;j++){
-            MGraph[i][j]=Infinity;
-        }
-    }
-    MGraph[0][1]=2553;
-    MGraph[0][2]=700;
-    MGraph[0][3]=704;
-    MGraph[1][2]=511;
-    MGraph[1][4]=812;
-    MGraph[2][3]=349;
-    MGraph[2][5]=1579;
-    MGraph[3][6]=651;
-    MGraph[4][5]=2368;
-    MGraph[5][6]=1385;
-      for(i=0;i<7;i++){
-        for(j=0;j<7;j++){
-            if(i==j){
-                MGraph[i][i]=0;
-            }
-            if(MGraph[i][j]<Infinity){}
-            MGraph[j][i]=MGraph[i][j];
-        }
-    }
-    return MGraph;
-  },
-
+  
   //distance中存储的是目前从源点到每个顶点的间最短路径
   Dijkstra: function(matrix, start ,destination) {
     const rows = matrix.length,//rows和cols一样，其实就是顶点个数
@@ -280,6 +251,142 @@ Page({
     //返回从起点到终点的最短路径
     
     return dist[destination];
+  },
+
+
+  //选择函数 根据传值选择创建那种矩阵
+  ChooseCreateGraph: function(index) {
+    var Graph=[[]]
+      switch (index) {
+        case "dist":
+          Graph = this.CreateMGraphDist();
+          break;
+        case "time":
+          Graph = this.CreateMGraphTime();
+          break;
+        case "cost":
+          Graph = this.CreateMGraphCost();
+          break;
+        case "custom":
+          Graph = this.CreateMGraphDist();
+          break;
+      
+        default:
+          break;
+      }
+      return Graph;
+  },
+  // 三种不同查询寻求 创建三种不同的邻接矩阵
+  //Distance
+  CreateMGraphDist: function() {
+    //js不用定义数据类型 弱数据类型 根据你所赋值的类型决定是什么类型的数据
+    var i,j;
+    var n=7;//图的顶点数
+    //js的二维数组初始化
+    var MGraph = new Array(n);//n为矩阵行列数 即图的顶点个数
+    for(i=0;i<MGraph.length;i++)
+    {
+        MGraph[i] = new Array(n);
+    }
+    for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            MGraph[i][j]=Infinity;
+        }
+    }
+    MGraph[0][1]=2553;
+    MGraph[0][2]=700;
+    MGraph[0][3]=704;
+    MGraph[1][2]=511;
+    MGraph[1][4]=812;
+    MGraph[2][3]=349;
+    MGraph[2][5]=1579;
+    MGraph[3][6]=651;
+    MGraph[4][5]=2368;
+    MGraph[5][6]=1385;
+      for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            if(i==j){
+                MGraph[i][i]=0;
+            }
+            if(MGraph[i][j]<Infinity){}
+            MGraph[j][i]=MGraph[i][j];
+        }
+    }
+    return MGraph;
+  },
+  //Time
+  CreateMGraphTime: function() {
+    //js不用定义数据类型 弱数据类型 根据你所赋值的类型决定是什么类型的数据
+    var i,j;
+    var n=7;//图的顶点数
+    //js的二维数组初始化
+    var MGraph = new Array(n);//n为矩阵行列数 即图的顶点个数
+    for(i=0;i<MGraph.length;i++)
+    {
+        MGraph[i] = new Array(n);
+    }
+    for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            MGraph[i][j]=Infinity;
+        }
+    }
+    MGraph[0][1]=6;
+    MGraph[0][2]=4;
+    MGraph[0][3]=3;
+    MGraph[1][2]=3;
+    MGraph[1][4]=3;
+    MGraph[2][3]=3;
+    MGraph[2][5]=4;
+    MGraph[3][6]=1;
+    MGraph[4][5]=8;
+    MGraph[5][6]=9;
+      for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            if(i==j){
+                MGraph[i][i]=0;
+            }
+            if(MGraph[i][j]<Infinity){}
+            MGraph[j][i]=MGraph[i][j];
+        }
+    }
+    return MGraph;
+  },
+  //Cost
+  CreateMGraphCost: function() {
+    //js不用定义数据类型 弱数据类型 根据你所赋值的类型决定是什么类型的数据
+    var i,j;
+    var n=7;//图的顶点数
+    //js的二维数组初始化
+    var MGraph = new Array(n);//n为矩阵行列数 即图的顶点个数
+    for(i=0;i<MGraph.length;i++)
+    {
+        MGraph[i] = new Array(n);
+    }
+    for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            MGraph[i][j]=Infinity;
+        }
+    }
+    MGraph[0][1]=321;
+    MGraph[0][2]=332;
+    MGraph[0][3]=266;
+    MGraph[1][2]=253;
+    MGraph[1][4]=123;
+    MGraph[2][3]=344;
+    MGraph[2][5]=496;
+    MGraph[3][6]=60;
+    MGraph[4][5]=483;
+    MGraph[5][6]=555;
+      for(i=0;i<7;i++){
+        for(j=0;j<7;j++){
+            if(i==j){
+                MGraph[i][i]=0;
+            }
+            if(MGraph[i][j]<Infinity){}
+            MGraph[j][i]=MGraph[i][j];
+        }
+    }
+    return MGraph;
   },
 
   /**

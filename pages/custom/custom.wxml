@@ -1,0 +1,43 @@
+<view class="page-body">
+  <view class="input-container">
+    <view class="input-l">
+            <!-- <text>出发地</text> -->
+            <image src="../../static/images/start.png" />
+            <input
+            name="start_input"
+            cursor-spacing='16' 
+            cursor='16'
+            confirm-type='search' 
+            placeholder="输入出发地" 
+            placeholder-style="color:#e2e2e2;"
+            focus='true'/>
+    </view>
+  </view>
+  <view class='flower-body'>
+    <view class='out'>
+      <view class='fade-in'>
+        <view class='container'>
+          <view class='one common'></view>
+          <view class='two common'></view>
+          <view class='three common'></view>
+          <view class='four common'></view>
+          <view class='five common'></view>
+          <view class='six common'></view>
+          <view class='seven common'></view>
+          <view class='eight common'></view>
+        </view>
+        <!-- <view class='bar'>
+          <view class='progress'></view>
+        </view> -->
+      </view>
+    </view>
+  </view>
+  <view class='wel'>
+    <view class='welcome animated lightSpeedIn' >
+      <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" >
+        查询
+      </button>
+    </view>
+  </view>
+</view>
+
