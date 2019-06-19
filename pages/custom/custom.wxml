@@ -1,18 +1,15 @@
 <view class="page-body">
-  <view class="input-container">
-    <view class="input-l">
-            <!-- <text>出发地</text> -->
-            <image src="../../static/images/start.png" />
-            <input
-            name="start_input"
-            cursor-spacing='16' 
-            cursor='16'
-            confirm-type='search' 
-            placeholder="输入出发地" 
-            placeholder-style="color:#e2e2e2;"
-            focus='true'/>
-    </view>
+  <view class="big-picker-container">
+      <view class="picker-container" bindtap="chageToPicker">
+        <image src="../../static/images/start.png" />
+        <picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+          <view class="picker-text">{{isPicker?array[index]:reminder}}</view>
+        </picker>
+      </view>
   </view>
+  
+  
+  
   <view class='flower-body'>
     <view class='out'>
       <view class='fade-in'>
@@ -34,10 +31,74 @@
   </view>
   <view class='wel'>
     <view class='welcome animated lightSpeedIn' >
-      <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" >
+      <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" bindtap="showList">
         查询
       </button>
     </view>
   </view>
+  <!-- scroll-view未成功 -->
+  <view  class="Dialogs {{Up?'animated fadeInUpBig':'animated fadeOutDown'}}" wx:if="{{isShow}}">
+    <image src="../../static/images/arrow-down.png"  bindtap="down" bindanimationend="back" />
+    
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+
+    <view class="list">
+      <text class="text1">{{start}}=>{{destination}}</text>
+      <text class="text2">路程为1998公里</text>
+    </view>
+    
+
+  </view>
 </view>
+
+<!-- 实现弹窗(自定义模态对话框) -->
+<!-- 蒙层view中绑定的preventTouchMove函数是一个空函数，使用了catch事件
+目的就是阻止touchmove这样一个冒泡事件继续向下传递。 -->
+
+ 
+
 
