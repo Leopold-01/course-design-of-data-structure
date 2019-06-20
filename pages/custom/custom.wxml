@@ -1,4 +1,5 @@
 <view class="page-body">
+  <image bindtap="backpage" class="backpage" src="../../static/images/Back_2.png" />
   <view class="big-picker-container">
       <view class="picker-container" bindtap="chageToPicker">
         <image src="../../static/images/start.png" />
@@ -29,7 +30,7 @@
       </view>
     </view>
   </view>
-  <view class='wel'>
+  <view wx:if="{{isPicker}}" class='wel'>
     <view class='welcome animated lightSpeedIn' >
       <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" bindtap="showList">
         查询
@@ -37,62 +38,25 @@
     </view>
   </view>
   <!-- scroll-view未成功 -->
-  <view  class="Dialogs {{Up?'animated fadeInUpBig':'animated fadeOutDown'}}" wx:if="{{isShow}}">
-    <image src="../../static/images/arrow-down.png"  bindtap="down" bindanimationend="back" />
-    
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
+ 
+  <scroll-view scroll-y='true' class="Dialogs {{Up?'animated fadeInUpBig':'animated fadeOutDown'}}" wx:if="{{isShow}}">
+    <view class="Title">
+         <text >按{{choose}}排序</text>
+        <image src="../../static/images/arrow-down.png"  bindtap="down" bindanimationend="back" />
     </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
-    </view>
-
-    <view class="list">
-      <text class="text1">{{start}}=>{{destination}}</text>
-      <text class="text2">路程为1998公里</text>
+   
+      
+      
+    <view class="list" wx:for="{{List}}" wx:key="key">
+          <text class="text1">{{item.start}}=>{{item.destination}}</text>
+          <text class="text2">{{choose}}为{{item.value}}{{unit}}</text>
     </view>
     
+    
 
-  </view>
+  </scroll-view>
+ 
+  
 </view>
 
 <!-- 实现弹窗(自定义模态对话框) -->

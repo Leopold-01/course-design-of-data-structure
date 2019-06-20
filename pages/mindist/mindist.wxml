@@ -1,4 +1,5 @@
 <view class='container'>
+    <image bindtap="backpage" class="backpage" src="../../static/images/Back_2.png" />
     <!-- <view class="title">
         <text >交通询问系统</text>
     </view> -->

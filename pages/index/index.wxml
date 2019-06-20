@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class='container'>
+  <image bindtap="backpage" class="backpage" src="../../static/images/Back_2.png" />
   <form bindsubmit='formSubmit'>
       <view class="input-container">
           <view class="input-l">

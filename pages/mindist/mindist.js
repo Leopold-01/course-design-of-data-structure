@@ -10,7 +10,13 @@ Page({
     btn4: '',
     index: ''
   },
-
+  
+  backpage: function () {
+    console.log("backkkkkkkkkkkk")
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   //动画完成后携带对应参数传到主页 查询
   //bindanimationend好像在页面有多个动画同时播放时 无法判断是点击的哪个
   //我可以通过用来控制动画的值来判断跳转页面要传的对应值

@@ -3,12 +3,20 @@
 page {
   background: #161B29;
   margin: 0 auto;
-  
   height: 100%;
   width: 100%;
+  /* TODO:这句注销了  底下弹出抽屉就不执行了？？？？？ */
+  /* why？？？这我只是之前写的时候随便写的啊？？？ */
   position: fixed;
 }
-
+.backpage{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 30rpx;
+  top:50rpx;
+  
+}
 .flower-body {
   z-index: -2;
   position: absolute;
@@ -419,8 +427,9 @@ page {
 }
 
 .picker-container {
+
   display: flex;
-  margin-top: 140rpx;
+  margin-top: 180rpx;
 }
 .picker-container image {
   width:50rpx;
@@ -459,18 +468,32 @@ input{
   position: absolute;
   top: 140rpx;
   width: 100%;
-  height: 1334rpx;
+  height: 1200rpx;
+ 
   border-radius: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
+.Title{
+  width: 100%;
+  
+  display: flex;
+}
+.Title text{
+  font-size: larger;
+  font-weight: bold;
+  display: flex;
+  margin-top: 5rpx;
+  margin-left: 30rpx;
+  color: #519af2;
+}
 .Dialogs image {
   width: 64rpx;
   height: 64rpx;
+  display: flex;
   margin-bottom: 10rpx;
- 
+  margin-left: 100rpx;
 }
 
 .list{

@@ -1,9 +1,14 @@
 {
   "pages": [
-    "pages/custom/custom",
     "pages/mindist/mindist",
     "pages/index/index",
     "pages/flower/flower",
+    "pages/custom/custom",
+    
+    
+    
+    
+    
     "pages/showpath/showpath"
     
     

@@ -13,6 +13,15 @@ Page {
     display: flex;
     flex-direction: column;
 }
+
+.backpage{
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  left: 30rpx;
+  top:50rpx;
+  
+}
 .title {
     
     color: white;

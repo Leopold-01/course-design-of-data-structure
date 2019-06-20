@@ -101,6 +101,12 @@ Page({
     ctx.draw();
 
   },
+  backpage:function () {
+    console.log("backkkkkkkkkkkk")
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   //在按钮点击事件画图  不知道为什么在真机上会有延迟 要按俩次button才绘出上次input传入的内容
   //解决方法放在forsubmit中画
   minDistance: function () {
@@ -145,8 +151,8 @@ Page({
     function ball(x, y) {
       ctx.beginPath()
       ctx.arc(x, y, 5, 0, Math.PI * 2)
-      ctx.setFillStyle('#4A148C')
-      ctx.setStrokeStyle('#4A148C')
+      ctx.setFillStyle('#27d7cd')
+      ctx.setStrokeStyle('#27d7cd')
       ctx.closePath();
       ctx.fill()
       ctx.stroke()
@@ -179,11 +185,30 @@ Page({
       if(i===start) break;
     }
   },
-
+  //index为dist/cost/time
   drawtext: function (ctx,index) {
-    var x = 20;
-    var y = 270;
-    var text = this.data.start + "到" + this.data.destination + index+ "假装为：" + result;
+    var x = Coord[4].x-50;
+    var y = Coord[5].y+50;
+    var desc='';
+    var unit='';
+    switch (index) {
+      case 'time':
+        desc='需要最短时间为：'
+        unit='小时'
+        break;
+      case 'cost':
+        desc='需要最少费用为：'
+        unit='元'
+        break;
+      case 'dist':
+        desc='最短路径为：'
+        unit='公里'
+        break;
+    
+      default:
+        break;
+    }
+    var text = this.data.start + "到" + this.data.destination + desc+ result+unit;
     ctx.setFontSize(16)
     ctx.fillText(text, x, y)
   },

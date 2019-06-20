@@ -12,38 +12,39 @@ m['上海'] = 6
 
 
 
-const canvasCenterX = 142;
+const canvasCenterX = 182;
 const canvasCenterY = 170;
-const gap= 50;
+const gap= 100;
+const gap1 =15;
 //七个点的坐标
 export const Coord = [
   {
     x: canvasCenterX,
-    y: canvasCenterY - gap
+    y: canvasCenterY - gap-10
   },
   {
-    x: canvasCenterX -gap,
-    y: canvasCenterY
+    x: canvasCenterX -gap +gap1,
+    y: canvasCenterY -gap/2
   },
   {
     x: canvasCenterX,
     y: canvasCenterY 
   },
   {
-    x: canvasCenterX + gap,
-    y: canvasCenterY
+    x: canvasCenterX + gap -gap1,
+    y: canvasCenterY -gap/2
   },
   {
-    x: canvasCenterX -gap,
-    y: canvasCenterY + gap
+    x: canvasCenterX -gap +gap1,
+    y: canvasCenterY + gap -gap/2
   },
   {
     x: canvasCenterX,
     y: canvasCenterY + gap
   },
   {
-    x: canvasCenterX +gap,
-    y: canvasCenterY + gap
+    x: canvasCenterX +gap-gap1,
+    y: canvasCenterY + gap -gap/2
   }
 ]
 
