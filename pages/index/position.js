@@ -10,7 +10,14 @@ m['成都'] = 4
 m['厦门'] = 5
 m['上海'] = 6
 
-
+export const M = {}
+M[0]='合肥'
+M[1]='重庆'
+M[2]='武汉'
+M[3]='杭州'
+M[4]='成都'
+M[5]='厦门'
+M[6]='上海'
 
 const canvasCenterX = 182;
 const canvasCenterY = 170;

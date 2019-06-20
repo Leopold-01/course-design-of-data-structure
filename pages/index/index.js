@@ -55,30 +55,51 @@ Page({
     // console.log(this.data.start)
     const num = this.data.pos;
     //因为第一个input输入后 点第二input不知道为什么就直接提交表单了 所以这里第二个值赋值会报错 所以判断下再赋值
-    if(num[start1]>-1&&num[destination1]>-1){
-      this.setData({
-        matrixStart: num[start1],
-        matrixDestination: num[destination1],
+    //当输入地名不存在时弹出toast
+    
+    if((num[start1]>=0&&num[start1]<=6)&&(num[destination1]>=0&&num[destination1]<=6))
+    {
+          if(num[start1]>-1&&num[destination1]>-1){
+            this.setData({
+              matrixStart: num[start1],
+              matrixDestination: num[destination1],
+            })
+          }
+          
+          
+          console.log("matrixStart:"+this.data.matrixStart+"  matrixDestination:"+this.data.matrixDestination)
+          console.log("minDistance")
+          //TODO:按照图创建邻接矩阵
+          
+          var Graph = this.ChooseCreateGraph(this.data.lookforwhat);
+          console.log(Graph);
+          //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
+          console.log(this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination));
+          result = this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination);
+          //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
+      
+          //TODO:在界面中渲染出来最后结果 
+          this.DrawCanvas();
+          this.setData({
+            isSearch: true
+          })
+          //将最后计算的结果存储到data中 
+    }else{
+      wx.showModal({
+        title: '提示',
+        content: '因为懒得模拟太多数据所以地名仅支持：合肥、重庆、武汉、杭州、成都、上海、厦门',
+        success (res) {
+          if (res.confirm) {
+            console.log('用户点击确定')
+          } else if (res.cancel) {
+            console.log('用户点击取消')
+          }
+        }
       })
+      
     }
     
-    console.log("matrixStart:"+this.data.matrixStart+"  matrixDestination:"+this.data.matrixDestination)
-    console.log("minDistance")
-    //TODO:按照图创建邻接矩阵
     
-    var Graph = this.ChooseCreateGraph(this.data.lookforwhat);
-    console.log(Graph);
-    //TODO:Dijkstra算法解决单源最短路径问题（迪杰斯特拉）
-    console.log(this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination));
-    result = this.Dijkstra(Graph, this.data.matrixStart, this.data.matrixDestination);
-    //TODO:Floyd算法解决单源最短路径问题（佛洛依德）
-
-    //TODO:在界面中渲染出来最后结果 
-    this.DrawCanvas();
-    this.setData({
-      isSearch: true
-    })
-    //将最后计算的结果存储到data中 
   },
   /**
    * 生命周期函数--监听页面加载
@@ -134,13 +155,13 @@ Page({
   DrawCanvas: function () {
     //创建mycanvas这个画布对象
     const ctx = wx.createCanvasContext("mycanvas");
-    
+    this.drawlocation(ctx)
     this.drawPath(ctx,this.data.matrixStart,this.data.matrixDestination)
     this.drawtext(ctx,this.data.lookforwhat)
     // this.drawline(ctx);
     // ctx.draw()写在每个函数里面 就只能画出后一次的内容  因为后一次的内容会覆盖第一次的 
     //把后一次的ctx.draw()设置为ctx.draw(true)就表示不覆盖前一次的
-    ctx.draw(true);
+    ctx.draw(false);
     
   },
   
@@ -161,6 +182,10 @@ Page({
     for(var i=0;i<Coord.length;i++)
     {
       ball(Coord[i].x,Coord[i].y);
+      //写上城市名字
+      ctx.setFontSize(16)
+      var text= posS.M[i]
+      ctx.fillText(text, Coord[i].x-13, Coord[i].y-12)
     }
     console.log("ball")
     // ctx.draw()
@@ -209,7 +234,7 @@ Page({
         break;
     }
     var text = this.data.start + "到" + this.data.destination + desc+ result+unit;
-    ctx.setFontSize(16)
+    ctx.setFontSize(17)
     ctx.fillText(text, x, y)
   },
 

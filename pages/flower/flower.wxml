@@ -19,9 +19,17 @@
 </view>
 <view class='wel'>
   <view class='welcome animated lightSpeedIn' >
-  <button class="welcome-text {{enter===1?'animated lightSpeedOut':''}}" open-type='getUserInfo' bindgetuserinfo='LoginEnter'>
-    欢迎使用交通查询系统
-  </button>
+    
+    <button  class=" {{enter===1?'animated lightSpeedOut':''}}" open-type='getUserInfo' bindgetuserinfo='LoginEnter'>
+      欢迎使用交通查询系统
+    </button>
+    
+  </view>
   
 </view>
+<view class="weui-footer myfoot">
+        <view class="weui-footer__links">
+            <navigator url="" class="weui-footer__link">Rimsky_</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © changling</view>
 </view>

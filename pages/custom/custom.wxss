@@ -406,16 +406,12 @@ page {
   justify-content: center;
   align-items: center;
   border: 1px solid white;
-  opacity: 0.5;
+  opacity: 1;
   border-radius: 10rpx;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
 }
 
-.welcome text {
-  color: aliceblue;
-  font-size: larger;
-  
-  
-}
+
 
 
 /* input */
@@ -442,22 +438,7 @@ page {
   
 }
 
-input{
-  width: 200rpx;
-  height: 60rpx;
-  /* border: 2px solid #ffffff; */
-  border-bottom: 1px solid rgb(167, 165, 165);
-  /* border-radius:10rpx;  */
-}
-.input-l {
-  display: flex;
-  margin-left: 60rpx;
-  
-}
-.input-l image {
-  width:60rpx;
-  height: 60rpx;
-}
+
 
 
 /* 实现弹框的动画 */
@@ -479,13 +460,15 @@ input{
   width: 100%;
   
   display: flex;
+  justify-content: center;
 }
 .Title text{
   font-size: larger;
   font-weight: bold;
-  display: flex;
+  position: absolute;
+  left: 30rpx;
   margin-top: 5rpx;
-  margin-left: 30rpx;
+  
   color: #519af2;
 }
 .Dialogs image {
@@ -493,7 +476,7 @@ input{
   height: 64rpx;
   display: flex;
   margin-bottom: 10rpx;
-  margin-left: 100rpx;
+  
 }
 
 .list{
@@ -510,4 +493,9 @@ input{
 .text2{
   font-size: medium;
   opacity: 0.5;
+}
+
+.myfoot{
+  position: absolute;
+  bottom: 2rpx;
 }

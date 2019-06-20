@@ -44,15 +44,18 @@
          <text >按{{choose}}排序</text>
         <image src="../../static/images/arrow-down.png"  bindtap="down" bindanimationend="back" />
     </view>
-   
-      
-      
     <view class="list" wx:for="{{List}}" wx:key="key">
           <text class="text1">{{item.start}}=>{{item.destination}}</text>
           <text class="text2">{{choose}}为{{item.value}}{{unit}}</text>
     </view>
     
-    
+    <view class="weui-footer">
+        <view class="weui-footer__links">
+            <navigator url="" class="weui-footer__link">Rimsky_</navigator>
+        </view>
+        <view class="weui-footer__text">Copyright © changling</view>
+    </view>
+
 
   </scroll-view>
  

@@ -1,10 +1,12 @@
 @charset "utf-8";
 /* DaTouWang URL: www.datouwang.com */
 page {
-  background: #161B29;
+  /* background: linear-gradient(to bottom, #c31432, #240b36); */
+  background:  #d6ecf0;
   margin: 0 auto;
   height: 100%;
   width: 100%;
+  position: fixed;
 }
 
 .body {
@@ -370,26 +372,32 @@ page {
 }
 
 .wel{
+  margin-top: 200rpx;
   display: flex;
   justify-content: center;
 }
 
 .welcome {
-  margin-top: 100rpx;
+  
   
   width: 480rpx;
   height: 100rpx;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
   border: 1px solid white;
-  opacity: 0.5;
+  opacity: 1;
   border-radius: 10rpx;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.7);
+}
+button{
+  background-color: #d6ecf0;
+  width: 480rpx;
+  height: 100rpx;
+}
+button::after{ 
+  border: 0;
 }
 
-.welcome text {
-  color: aliceblue;
-  font-size: larger;
-  
-  
+
+.myfoot{
+  margin-top:370rpx;
 }

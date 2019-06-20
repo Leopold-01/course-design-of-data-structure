@@ -1,19 +1,12 @@
 {
   "pages": [
+    "pages/flower/flower",
     "pages/mindist/mindist",
     "pages/index/index",
-    "pages/flower/flower",
-    "pages/custom/custom",
     
+    "pages/custom/custom"
     
-    
-    
-    
-    "pages/showpath/showpath"
-    
-    
-    
-    
+ 
   ],
   "window": {
     "backgroundTextStyle": "light",
