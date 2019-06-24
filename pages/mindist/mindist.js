@@ -125,45 +125,5 @@ Page({
     })
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-    //当页面隐藏的时候把样式值修改为默认
-    //这里设置会导致 动画结束后 到页面成功跳转 之间的间隙出现复位bug
-    // this.setData({
-    //   btn1:'',
-    //   btn2:'',
-    //   btn3:'',
-    //   btn4:''
-    // })
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-    
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-    
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-    
-  }
+ 
 })
